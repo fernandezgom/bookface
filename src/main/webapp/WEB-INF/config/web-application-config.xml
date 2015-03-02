@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+       	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.1.xsd
+           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
+		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	<aop:aspectj-autoproxy />
+	
+	<!-- ******************** U T I L I T Y ******************** -->
+	<!--
+		JLF Add a PropertyPlaceholderConfigurer which loads properties from
+		example.properties. These properties will be used in the Spring XML
+		definitions: occurences of ${...} will be replaced with their value in
+		the properties file. If the property can not be found, an error is
+		thrown. Since this bean implements BeanFactoryPostProcessor, it will
+		be automatically picked up by Spring and executed.-->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:bookface-config.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	
+	
+	<!-- Message internalisation -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+    
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+    </mvc:interceptors>
+    <!-- End Message internalisation -->
+    
+
+	<!-- Aspects -->
+	<bean id="authentificationAspect" class="com.bookface.aspect.AuthentificationAdvice">
+		<property name="loginUserService" ref="loginUserService" />
+	</bean>
+	<bean id="loggerAspect" class="com.bookface.aspect.LogAdvice"/>
+	
+	<!-- Scans for application @Components to deploy -->
+	<context:component-scan base-package="com.bookface.controller" />
+	
+	<!-- Scans for application @Service to deploy -->
+	<context:component-scan base-package="com.bookface.bo" />
+	
+	
+	<!-- ******************** DATA ACCESS OBJECTS ******************** -->
+	<bean id="loginUserDAO" class="com.bookface.dao.LoginUserDAO">
+		<property name="sessionFactory" ref="bookfaceSessionFactory" />
+	</bean>
+
+	
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <property name="messageConverters">
+	      <util:list id="beanList">
+	        <ref bean="byteArrayHttpMessageConverter"/>
+	        <ref bean="jsonHttpMessageConverter"/>
+	        <ref bean="stringHttpMessageConverter"/>
+	      </util:list>
+	    </property>
+	</bean>
+
+	<!-- Custom bean to accept ByteArray -->
+	<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter "/>
+	
+	
+	<!-- JSON Settings -->
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+    	<property name="prefixJson" value="false" />
+    	<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	    <property name="mediaTypes">
+	        <map>
+	        	<entry key="html" value="text/html"/> 
+	            <entry key="json" value="application/json" />
+	        </map>
+	    </property>
+	    <property name="defaultViews">
+	        <list>
+	            <bean
+	                class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+	                <property name="objectMapper">
+	                    <ref bean="JacksonObjectMapper" />
+	                </property>
+	            </bean>
+	        </list>
+	    </property>
+	    <property name="favorPathExtension" value="false" />
+	    <property name="favorParameter" value="true" />
+	    <property name="useNotAcceptableStatusCode" value="true" />
+	</bean>
+
+	<bean id="JacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+	<!-- Imports the configurations of the different infrastructure systems of the application -->
+	<import resource="webmvc-config.xml" />
+	<import resource="data-access-config.xml" />
+	<import resource="security-config.xml" />
+	
+
+</beans>
