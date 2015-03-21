@@ -1,10 +1,89 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<title>monitorWOZ</title>
+<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+<style>
+table,th,td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
 
+th,td {
+	padding: 5px;
+}
+</style>
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+</head>
+<body tiles:fragment="content" bgcolor="#ffffff">
+	<h1 align="center">Bookface-Add author</h1>
+	<table>
+		<tr align="left">
+			<td align="left">
+				<table>
+					<tr>
+						<th colspan="2">Register a new author</th>
+					</tr>
+					<tr>
+						<td>Please insert new author</td>
+						<td><input id="author" name="author" type="text" style="width: 1000px;"
+							th:value="*{author}" /></td>
+					</tr>
+					<tr>
+						<td>Please insert biography</td>
+						<td align="right" colspan="2"><textarea rows="10" cols="120"
+								id="bio" name="bio">
+						</textarea></td>
+					</tr>
+					<tr>
+						<td align="right" colspan="2"><input id="submit"
+							name="submit" type="button" value="Submit" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			   $("#submit").click(function() {
+				   submitCredentials();
+			   });
+		});
+	
+		function submitCredentials(){
+			var sub = {
+		       	 "author": $('#author').val(), 
+		    	 "biography": $('#bio').val() 	
+		        };
+		    $.ajax({
+		        type: 'POST',
+		        contentType : 'application/json; charset=utf-8',
+		        dataType : 'json',
+		        url: "registerAuthor",
+		        data: JSON.stringify(sub),
+		        success: function(data){
+			        if (data==true) {
+			        	alert("Succesfully registered");
+			        	setTimeout(function(){alert(window.location.href = "/bookface/books")},1000);
+			        } else {
+			        	alert("Author already registered");
+					}
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
+	</script>
 </body>
 </html>

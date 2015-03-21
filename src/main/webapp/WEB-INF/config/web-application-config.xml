@@ -16,7 +16,7 @@
            http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
 		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
 
-	<aop:aspectj-autoproxy />
+<!-- 	<aop:aspectj-autoproxy /> -->
 	
 	<!-- ******************** U T I L I T Y ******************** -->
 	<!--
@@ -51,20 +51,27 @@
     
 
 	<!-- Aspects -->
-	<bean id="authentificationAspect" class="com.bookface.aspect.AuthentificationAdvice">
-		<property name="loginUserService" ref="loginUserService" />
-	</bean>
-	<bean id="loggerAspect" class="com.bookface.aspect.LogAdvice"/>
+	
+<!-- 	<bean id="authentificationAspect" class="com.bookface.aspect.AuthentificationAdvice"> -->
+<!-- 		<property name="loginUserService" ref="loginUserService" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="loggerAspect" class="com.bookface.aspect.LogAdvice"/> -->
 	
 	<!-- Scans for application @Components to deploy -->
 	<context:component-scan base-package="com.bookface.controller" />
 	
 	<!-- Scans for application @Service to deploy -->
-	<context:component-scan base-package="com.bookface.bo" />
+	<context:component-scan base-package="com.bookface.service" />
 	
 	
 	<!-- ******************** DATA ACCESS OBJECTS ******************** -->
 	<bean id="loginUserDAO" class="com.bookface.dao.LoginUserDAO">
+		<property name="sessionFactory" ref="bookfaceSessionFactory" />
+	</bean>
+	<bean id="authorDAO" class="com.bookface.dao.AuthorDAO">
+		<property name="sessionFactory" ref="bookfaceSessionFactory" />
+	</bean>
+	<bean id="bookDAO" class="com.bookface.dao.BookDAO">
 		<property name="sessionFactory" ref="bookfaceSessionFactory" />
 	</bean>
 

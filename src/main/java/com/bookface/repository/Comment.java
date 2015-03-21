@@ -1,6 +1,6 @@
 package com.bookface.repository;
 
-// Generated 02-Mar-2015 16:57:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-Mar-2015 15:50:15 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class Comment implements java.io.Serializable {
 
 	private Integer idComment;
 	private Book book;
-	private User user;
+	private Users users;
 	private Date date;
 	private String comment;
 
@@ -35,9 +35,9 @@ public class Comment implements java.io.Serializable {
 		this.date = date;
 	}
 
-	public Comment(Book book, User user, Date date, String comment) {
+	public Comment(Book book, Users users, Date date, String comment) {
 		this.book = book;
-		this.user = user;
+		this.users = users;
 		this.date = date;
 		this.comment = comment;
 	}
@@ -64,13 +64,13 @@ public class Comment implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_user")
-	public User getUser() {
-		return this.user;
+	@JoinColumn(name = "username")
+	public Users getUsers() {
+		return this.users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

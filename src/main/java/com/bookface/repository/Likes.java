@@ -1,6 +1,6 @@
 package com.bookface.repository;
 
-// Generated 02-Mar-2015 16:57:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-Mar-2015 15:50:15 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,14 +21,14 @@ public class Likes implements java.io.Serializable {
 
 	private Integer idLikes;
 	private Book book;
-	private User user;
+	private Users users;
 
 	public Likes() {
 	}
 
-	public Likes(Book book, User user) {
+	public Likes(Book book, Users users) {
 		this.book = book;
-		this.user = user;
+		this.users = users;
 	}
 
 	@Id
@@ -53,13 +53,13 @@ public class Likes implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_user")
-	public User getUser() {
-		return this.user;
+	@JoinColumn(name = "username")
+	public Users getUsers() {
+		return this.users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 }

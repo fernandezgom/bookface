@@ -1,6 +1,6 @@
 package com.bookface.repository;
 
-// Generated 02-Mar-2015 16:57:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-Mar-2015 15:50:15 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,7 +54,7 @@ public class Author implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "bio", length = 2000)
+	@Column(name = "bio", length = 10000)
 	public String getBio() {
 		return this.bio;
 	}

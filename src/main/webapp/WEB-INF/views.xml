@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+	
+	<definition name="login" template="/login.html" templateType="thymeleaf"/>
+	
+	<definition name="books" template="/books.html" templateType="thymeleaf"/>
+	
+	<definition name="register" template="/register.html" templateType="thymeleaf"/>
+	
+	<definition name="addAuthor" template="/addAuthor.html" templateType="thymeleaf"/>
+	
+</tiles-definitions>

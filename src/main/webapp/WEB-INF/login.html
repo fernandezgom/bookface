@@ -1,10 +1,81 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"></meta>
 </head>
-<body>
+<body class="back"
+	style="margin-top: 0px; margin-bottom: 0px; height: 100%;">
+	<div class="background"
+		style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px; max-width: 1120px;">
+		<table align="center">
+			<tbody>
+				<tr>
+					<td>
+						<div>Bookface</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table align="center">
+			<tbody>
+				<tr align="center">
+					<td align="center">
+						<div id="wrapper_dark_gray"
+							style="height: 634px; width: 1080px; padding-top: 20px;">
+							<div style="display: inline; width: 100%">
+								<span style="display: inline; font-size: 18px;"
+									th:text="#{welcometo}"> Welcome to <b
+									style="display: inline; font-weight: bold;">iLearnFractions
+								</b>
+								</span>
+							</div>
+							<div id="wrapper_light_gray"
+								style="height: 150px; width: 1060px; margin-top: 30px;">
+								<form name="login-form" action="j_spring_security_check"
+									method="post" style="width: 100%;">
+									<span
+										style="padding: 30px 50px 10px 80px; margin-left: 0px; display: inherit; text-align: left; line-height: 30px; font-size: 17px; font-weight: bold; color: #0076a3;">
+										Please sign in:<br />
+									</span>
+									<table>
+										<tr style="display: inline-flex;">
+											<td style="padding-left: 0px;"><span
+												style="color: #0076a3;" th:text="#{username}">Username</span>
+											</td>
+											<td style="margin-right: 55px;"><input name="username"
+												type="text"
+												style="-webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; outline: 0; height: 25px; width: 225px; padding-left: 10px; padding-right: 10px; -moz-box-shadow: 0 2px 4px #bbb inset; -webkit-box-shadow: 0 2px 4px #BBB inset; box-shadow: 0 2px 4px #BBB inset;" /></td>
+											<td><span style="color: #0076a3;" th:text="#{password}">Password</span></td>
+											<td style="padding-right: 20px;"><input name="password"
+												type="password"
+												style="-webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; outline: 0; height: 25px; width: 225px; padding-left: 10px; padding-right: 10px; -moz-box-shadow: 0 2px 4px #bbb inset; -webkit-box-shadow: 0 2px 4px #BBB inset; box-shadow: 0 2px 4px #BBB inset;" /></td>
+											<td><input type="submit" name="submit" value="LOGIN"
+												id="loginButton" /></td>
+										</tr>
+									</table>
+									<span th:text="${error}"
+										style="color: red; font-size: 14px; margin-left: 100px">
+									</span>
+									<span th:text="${msg}"
+										style="color: blue; font-size: 14px; margin-left: 100px">
+									</span>
+								</form>
+							</div>
+							<div style="display: inline; margin-left: 10px; float: left; width: 130px;">
+								<a href="#" th:href="@{/register}" class="it2lbutton"
+									th:text="#{register}"> Register
+								</a>
+							</div>
 
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
+

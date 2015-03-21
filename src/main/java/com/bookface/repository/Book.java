@@ -1,6 +1,6 @@
 package com.bookface.repository;
 
-// Generated 02-Mar-2015 16:57:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-Mar-2015 15:50:15 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
