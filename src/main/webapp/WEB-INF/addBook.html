@@ -24,7 +24,8 @@ th,td {
 	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
 </head>
 <body tiles:fragment="content" bgcolor="#ffffff">
-	<h1 align="center">Bookface-Add author</h1>
+	<h1 align="center">Bookface-Add book</h1>
+	<h1 id="auth" align="center" th:text="${author}">Author</h1>
 	<table>
 		<tr align="left">
 			<td align="left">
@@ -59,26 +60,22 @@ th,td {
 			   });
 		});
 
-		function getIdAuthor(){
-			return "123";
-		}
-	
 		function submitCredentials(){
 			var sub = {
 		       	 "book": $('#book').val(), 
 		    	 "syn": $('#syn').val(),
-		    	 "idAuthor": getIdAuthor() 	
+		    	 "author": $('#auth').html() 	
 		        };
 		    $.ajax({
 		        type: 'POST',
 		        contentType : 'application/json; charset=utf-8',
 		        dataType : 'json',
-		        url: "registerBook",
+		        url: "/bookface/book/registerBook",
 		        data: JSON.stringify(sub),
 		        success: function(data){
 			        if (data==true) {
 			        	alert("Succesfully registered");
-			        	setTimeout(function(){alert(window.location.href = "/bookface/books")},1000);
+			        	setTimeout(function(){alert(window.location.href = "/bookface/main")},1000);
 			        } else {
 			        	alert("Book already registered");
 					}

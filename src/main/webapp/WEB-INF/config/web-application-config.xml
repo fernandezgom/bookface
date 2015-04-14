@@ -74,24 +74,24 @@
 	<bean id="bookDAO" class="com.bookface.dao.BookDAO">
 		<property name="sessionFactory" ref="bookfaceSessionFactory" />
 	</bean>
+	
+	<bean id="likesDAO" class="com.bookface.dao.LikesDAO">
+		<property name="sessionFactory" ref="bookfaceSessionFactory" />
+	</bean>
 
 	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 	    <property name="messageConverters">
 	      <util:list id="beanList">
-	        <ref bean="byteArrayHttpMessageConverter"/>
 	        <ref bean="jsonHttpMessageConverter"/>
 	        <ref bean="stringHttpMessageConverter"/>
 	      </util:list>
 	    </property>
 	</bean>
 
-	<!-- Custom bean to accept ByteArray -->
-	<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter "/>
-	
 	
 	<!-- JSON Settings -->
-	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     	<property name="prefixJson" value="false" />
     	<property name="supportedMediaTypes" value="application/json" />
 	</bean>

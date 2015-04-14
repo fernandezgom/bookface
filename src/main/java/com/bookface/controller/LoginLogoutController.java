@@ -37,7 +37,7 @@ public class LoginLogoutController {
 
 	}
 
-	@RequestMapping(value = "/books**", method = RequestMethod.GET)
+	@RequestMapping(value = "/main**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 
 		ModelAndView model = new ModelAndView();
@@ -46,7 +46,7 @@ public class LoginLogoutController {
 		model.addObject("title",
 				"Spring Security Login Form - Database Authentication");
 		model.addObject("message", "This page is for ROLE_ADMIN only!");
-		model.setViewName("books");
+		model.setViewName("main");
 		return model;
 
 	}

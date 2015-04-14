@@ -1,7 +1,12 @@
 package com.bookface.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -28,6 +33,27 @@ public class AuthorDAO extends HibernateDaoSupport implements IAuthorDAO {
 			au.setBio(bio);
 			session.saveOrUpdate(au);
 			return true;
+		} catch (Exception e){
+			throw new BookfaceException(e);
+		}
+	}
+	
+	public List<Author> getAllData() throws BookfaceException {
+		try {
+			final Criteria criteria = getBookfaceSession().createCriteria(Author.class);
+			List<Author> list = (List<Author>) criteria.list();
+			return list;
+		} catch (Exception e){
+			throw new BookfaceException(e);
+		}
+	}
+	
+	public Author getAllAuthorData(String author) throws BookfaceException {
+		try {
+			final Criteria criteria = getBookfaceSession().createCriteria(Author.class);
+			criteria.add(Restrictions.eq("name", author));
+			Author au = (Author) criteria.uniqueResult();
+			return au;
 		} catch (Exception e){
 			throw new BookfaceException(e);
 		}

@@ -25,7 +25,6 @@ table#tbl {
 	width: 100%;
 	background-color: #f1f1c1;
 }
-
 table#tbl2 {
 	width: 100%;
 	background-color: #f0f8ff;
@@ -35,9 +34,14 @@ table#tbl2 {
 <body tiles:fragment="content" bgcolor="#ffffff">
 	<div class="background"
 		style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px; max-width: 1120px;">
-		<h1 align="center">Favourites/Likes</h1>
-		<table id="tbl2" border="1" style="width: 100%">
+		<h1 id="book" align="center" th:text="${book}">Book</h1>
+		<table id="tbl2">
 			<tr>
+				<td>
+					<div id="ref"
+						style="display: inline; margin-left: 10px; float: left; width: 130px;">
+					</div>
+				</td>
 				<td>
 					<div
 						style="display: inline; margin-left: 10px; float: left; width: 130px;">
@@ -49,21 +53,30 @@ table#tbl2 {
 		</table>
 		<table id="tbl" border="1" style="width: 100%">
 			<tr>
-				<th>Author</th>
-				<th>Books</th>
+				<td>Synopsis</td>
+				<td id="syn"></td>
+			</tr>
+			<tr>
+				<td>Likes</td>
+				<td id="lik"></td>
+			</tr>
+			<tr>
+				<td>Comments</td>
+				<td id="com"></td>
 			</tr>
 		</table>
 	</div>
 	<script type="text/javascript">
 	<!--
 		$(document).ready(function() {
+			$('#ref').append("<a href='/bookface/book/doLike/"+$('#book').html().replace(/ /g, '_')+"' th:href='@{/book/doLike/"+$('#book').html()+"}' th:text='#{like}'> Like </a>");
 			getAllData();
 		});
 
 		function getAllData(){
 		    $.ajax({
 		        type: 'GET',
-		        url: "author/getAllLikes",
+		        url: "getAllBook?book="+ $('#book').html().replace(/ /g, '_'),
 		        dataType: "json",
 		        success: function(data){
 		        	createTableDinamically(data);
@@ -75,17 +88,13 @@ table#tbl2 {
 		}
 
 		function createTableDinamically(res){
-			 for (i = 0; i < res.length; i++) {
-		         var text="<tr><td><a href=author/"+res[i].author.replace(/ /g, '_')+">"+res[i].author+"</a></td>";
-		         var text2="<td><ul>"
-		         for (j = 0; j < res[i].books.length; j++) {
-		             text2=text2.concat("<li><a href=book/"+res[i].books[j].book.replace(/ /g, '_')+">"+res[i].books[j].book+"</a></li>");
-		         }
-		         text2=text2.concat("</ul></td></tr>");
-		         text=text.concat(text2);
-		         $('#tbl').append(text);
-			 }
-
+			$('#syn').append(res.syn);
+			var text="<ul>"
+			for (j = 0; j < res.likes.length; j++) {
+	             text=text.concat("<li>"+res.likes[j].username+ "</li>");
+	         }
+			text=text.concat("</ul>");
+			$('#lik').append(text);
 		}
 	-->
 	</script>
