@@ -24,27 +24,24 @@ th,td {
 	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
 </head>
 <body tiles:fragment="content" bgcolor="#ffffff">
-	<h1 align="center">Bookface-Add author</h1>
+	<h1 align="center">Register new author</h1>
 	<table>
 		<tr align="left">
 			<td align="left">
 				<table>
 					<tr>
-						<th colspan="2">Register a new author</th>
-					</tr>
-					<tr>
-						<td>Please insert new author</td>
-						<td><input id="author" name="author" type="text" style="width: 1000px;"
+						<td>Author</td>
+						<td><input id="author" name="author" type="text" style="width: 900px;"
 							th:value="*{author}" /></td>
 					</tr>
 					<tr>
-						<td>Please insert biography</td>
+						<td>Biography</td>
 						<td align="right" colspan="2"><textarea rows="10" cols="120"
 								id="bio" name="bio">
 						</textarea></td>
 					</tr>
 					<tr>
-						<td align="right" colspan="2"><input id="submit"
+						<td align="left" colspan="2"><input id="submit"
 							name="submit" type="button" value="Submit" /></td>
 					</tr>
 				</table>

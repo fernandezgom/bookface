@@ -4,21 +4,33 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 	
 <tiles-definitions>
+
+	<definition name="main" extends="standardLayout">
+		<put-attribute name="body" value="/main.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="book" extends="standardLayout">
+		<put-attribute name="body" value="/book.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="addAuthor" extends="standardLayout">
+		<put-attribute name="body" value="/addAuthor.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="author" extends="standardLayout">
+		<put-attribute name="body" value="/author.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="addBook" extends="standardLayout">
+		<put-attribute name="body" value="/addBook.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="likes" extends="standardLayout">
+		<put-attribute name="body" value="/likes.html :: content" type="thymeleaf"/>
+	</definition>
 	
 	<definition name="login" template="/login.html" templateType="thymeleaf"/>
 	
-	<definition name="main" template="/main.html" templateType="thymeleaf"/>
-	
-	<definition name="book" template="/book.html" templateType="thymeleaf"/>
-	
 	<definition name="register" template="/register.html" templateType="thymeleaf"/>
-	
-	<definition name="addAuthor" template="/addAuthor.html" templateType="thymeleaf"/>
-	
-	<definition name="author" template="/author.html" templateType="thymeleaf"/>
-	
-	<definition name="addBook" template="/addBook.html" templateType="thymeleaf"/>
-	
-	<definition name="likes" template="/likes.html" templateType="thymeleaf"/>
 	
 </tiles-definitions>

@@ -21,6 +21,7 @@ public class Users implements java.io.Serializable {
 	private String username;
 	private String password;
 	private byte enabled;
+	private String email;
 	private Set<UserRoles> userRoleses = new HashSet<UserRoles>(0);
 	private Set<Likes> likeses = new HashSet<Likes>(0);
 	private Set<Comment> comments = new HashSet<Comment>(0);
@@ -28,18 +29,20 @@ public class Users implements java.io.Serializable {
 	public Users() {
 	}
 
-	public Users(String username, String password, byte enabled) {
+	public Users(String username, String password, byte enabled, String email) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.email= email;
 	}
 
-	public Users(String username, String password, byte enabled,
+	public Users(String username, String password, byte enabled,String email,
 			Set<UserRoles> userRoleses, Set<Likes> likeses,
 			Set<Comment> comments) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.email=email;
 		this.userRoleses = userRoleses;
 		this.likeses = likeses;
 		this.comments = comments;
@@ -71,6 +74,15 @@ public class Users implements java.io.Serializable {
 
 	public void setEnabled(byte enabled) {
 		this.enabled = enabled;
+	}
+	
+	@Column(name = "email", nullable = false, length = 45)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")

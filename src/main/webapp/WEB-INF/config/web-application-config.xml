@@ -78,6 +78,10 @@
 	<bean id="likesDAO" class="com.bookface.dao.LikesDAO">
 		<property name="sessionFactory" ref="bookfaceSessionFactory" />
 	</bean>
+	
+	<bean id="commentsDAO" class="com.bookface.dao.CommentsDAO">
+		<property name="sessionFactory" ref="bookfaceSessionFactory" />
+	</bean>
 
 	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

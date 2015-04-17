@@ -1,5 +1,7 @@
 package com.bookface.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookface.service.inter.IBookService;
 import com.bookface.vo.BookDetailsVO;
-import com.bookface.vo.ListAuthorBooks;
+import com.bookface.vo.CommentsVO;
 
 /**
  * Handles requests for the application exercise sequence.
@@ -91,12 +93,40 @@ public class BookController {
 		return null;
 	}
 	
+	/**
+	 * JLF: Get all comments from that book
+	 */
+	@RequestMapping(value = "/getAllComments",method = RequestMethod.GET)
+	public @ResponseBody List<CommentsVO> getAllComments(@RequestParam(value = "book") String book) {
+		logger.info("JLF --- BookController getAllData ");
+		try {
+			return getBookService().getAllComments(book.replace("_", " "));
+		} catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
+	}
+	
 
 	@RequestMapping(value = "/registerBook", method = RequestMethod.POST)
     public @ResponseBody boolean registerUser(@RequestBody BookDetailsVO data, HttpServletRequest req){
 		logger.info("JLF --- BookController registerBook() --- Register a book");
 		try {
 			return getBookService().insertNewBook(data.getBook(), data.getSyn(), data.getAuthor());
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return false;
+		
+	}
+	
+	@RequestMapping(value = "/insertComment", method = RequestMethod.POST)
+    public @ResponseBody boolean insertComment(@RequestBody CommentsVO data, HttpServletRequest req){
+		logger.info("JLF --- BookController registerBook() --- Register a book");
+		try {
+			User us = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return getBookService().insertComment(data.getBook(), data.getComment(), us.getUsername());
 		}
 		catch (Exception e){
 			logger.error(e.toString());

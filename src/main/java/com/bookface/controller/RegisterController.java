@@ -54,7 +54,7 @@ public class RegisterController {
 		logger.info("JLF --- RegisterController registerUser() --- Inserting a sequence of exercises for that user");
 		logger.info("user= "+ messageForm.getUsername());
 		try{
-			return getLoginUserService().insertNewUser(messageForm.getUsername(), messageForm.getPassword());
+			return getLoginUserService().insertNewUser(messageForm.getUsername(), messageForm.getPassword(), messageForm.getEmail());
 		}
 		catch (Exception e){
 			logger.error(e.toString());

@@ -24,9 +24,9 @@ public class LoginUserService implements ILoginUserService {
 		this.loginUserDAO = loginUserDAO;
 	}
 
-	public boolean insertNewUser(String username, String password) throws BookfaceException {
+	public boolean insertNewUser(String username, String password, String email) throws BookfaceException {
 		try {
-			return getLoginUserDAO().insertNewUser(username, password);
+			return getLoginUserDAO().insertNewUser(username, password, email);
 		} catch (Exception e) {
 			logger.error(e.toString());
 		}

@@ -93,6 +93,21 @@ public class AuthorController {
 	/**
 	 * JLF: Get all authors an books
 	 */
+	@RequestMapping(value = "/getUser",method = RequestMethod.GET)
+	public @ResponseBody String getUser() {
+		logger.info("JLF --- AuthorController getUser");
+		try {
+			User us = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return us.getUsername();
+		} catch (Exception e){
+			logger.error(e.toString());
+		}
+		return "";
+	}
+	
+	/**
+	 * JLF: Get all authors an books
+	 */
 	@RequestMapping(value = "/getAllLikes",method = RequestMethod.GET)
 	public @ResponseBody ArrayList<ListAuthorBooks> getAllDataLikes() {
 		logger.info("JLF --- AuthorController getAllData ");

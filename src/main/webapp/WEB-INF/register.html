@@ -5,51 +5,64 @@
 	xmlns:tiles="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org" lang="en">
 <head>
-	<title>monitorWOZ</title>
-	<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
-	<style>
-		table, th, td {
-		    border: 1px solid black;
-		    border-collapse: collapse;
-		}
-		th, td {
-		    padding: 5px;
-		}
-	</style>
-	<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
-	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+<title>register</title>
+<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+<style>
+table,th,td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th,td {
+	padding: 5px;
+}
+</style>
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
 </head>
-<body tiles:fragment="content" bgcolor="#ffffff">
-	<h1 align="center">Bookface-Register</h1>
-	<table>
+<body tiles:fragment="content" bgcolor="#ffffff" id="wrapper">
+	<table id="header" align="center">
+		<tr align="center">
+			<td id="logo" align="center">
+				<div class="it2llogo" id="it2llogo">
+					<a href="#" th:href="@{/main}"> <img
+						src="../../images/bookface.jpg"
+						th:src="@{/resources/images/bookface.jpg}" alt="italk2learn" />
+					</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<h1 align="center">Register</h1>
+	<table align="center">
 		<tr align="left">
 			<td align="left">
 				<table>
-						<tr>
-    						<th colspan="2">Choose an username and password</th>
-						</tr>
-						<tr>
-						 	<td>
-								Please insert username 
-							</td>
-							<td>
-								<input id="username" name="username" type="text" th:value="*{username}" />
-							</td>	
-						</tr>
-						<tr>
-							<td>
-								Please insert password
-							</td>
-							<td>
-								<input id="password" name="password" type="password" th:value="*{password}"/>
-							</td>
-						</tr>
-						<tr>
-							<td align="right" colspan="2">
-								<input id="submit" name="submit" type="button" value="Submit" />
-							</td>
-						</tr>
+					<tr>
+						<th colspan="2">Choose an username and password</th>
+					</tr>
+					<tr>
+						<td>Please insert username</td>
+						<td><input id="username" name="username" type="text"
+							th:value="*{username}" /></td>
+					</tr>
+					<tr>
+						<td>Please insert email</td>
+						<td><input id="email" name="email" type="text"
+							th:value="*{email}" /></td>
+					</tr>
+					<tr>
+						<td>Please insert password</td>
+						<td><input id="password" name="password" type="password"
+							th:value="*{password}" /></td>
+					</tr>
+					<tr>
+						<td align="right" colspan="2"><input id="submit"
+							name="submit" type="button" value="Submit" /></td>
+					</tr>
 				</table>
 			</td>
 		</tr>
@@ -65,7 +78,8 @@
 		function submitCredentials(){
 			var sub = {
 		       	 "password": $('#password').val(), 
-		    	 "username": $('#username').val() 	
+		    	 "username": $('#username').val(),
+		    	 "email": $('#email').val()
 		        };
 		    $.ajax({
 		        type: 'POST',

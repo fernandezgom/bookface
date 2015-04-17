@@ -34,19 +34,12 @@ table#tbl2 {
 <body tiles:fragment="content" bgcolor="#ffffff">
 	<div class="background"
 		style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px; max-width: 1120px;">
-		<h1 id="book" align="center" th:text="${book}">Book</h1>
+		<h1 id="book" align="center" th:text="${book}" style="color: red;">Book</h1>
 		<table id="tbl2">
 			<tr>
 				<td>
 					<div id="ref"
 						style="display: inline; margin-left: 10px; float: left; width: 130px;">
-					</div>
-				</td>
-				<td>
-					<div
-						style="display: inline; margin-left: 10px; float: left; width: 130px;">
-						<a href="#" th:href="@{/main}"
-							th:text="#{main}"> Main page </a>
 					</div>
 				</td>
 			</tr>
@@ -65,13 +58,67 @@ table#tbl2 {
 				<td id="com"></td>
 			</tr>
 		</table>
+		<table>
+		<tr align="left">
+			<td align="left">
+				<table>
+					<tr>
+						<td>Comment</td>
+						<td align="right" colspan="2"><textarea rows="10" cols="120"
+								id="comment" name="comment">
+						</textarea></td>
+					</tr>
+					<tr>
+						<td align="left" colspan="2"><input id="submit"
+							name="submit" type="button" value="Submit" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 	</div>
 	<script type="text/javascript">
 	<!--
 		$(document).ready(function() {
 			$('#ref').append("<a href='/bookface/book/doLike/"+$('#book').html().replace(/ /g, '_')+"' th:href='@{/book/doLike/"+$('#book').html()+"}' th:text='#{like}'> Like </a>");
-			getAllData();
+			getAll();
+			$("#submit").click(function() {
+				   submitComment();
+			   });
 		});
+
+		function getAll(){
+			$('#syn').empty();
+			$('#lik').empty();
+			$('#com').empty();
+			getAllData();
+			getAllComments();
+		}
+
+		function submitComment(){
+			var sub = {
+		       	 "book": $('#book').html(), 
+		    	 "comment": $('#comment').val() 	
+		        };
+		    $.ajax({
+		        type: 'POST',
+		        contentType : 'application/json; charset=utf-8',
+		        dataType : 'json',
+		        url: "insertComment",
+		        data: JSON.stringify(sub),
+		        success: function(data){
+			        if (data==true) {
+			        	alert("Succesfully registered");
+			        	setTimeout(function(){getAll()},1000);
+			        } else {
+			        	alert("Author already registered");
+					}
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
 
 		function getAllData(){
 		    $.ajax({
@@ -87,6 +134,20 @@ table#tbl2 {
 		    });
 		}
 
+		function getAllComments(){
+		    $.ajax({
+		        type: 'GET',
+		        url: "getAllComments?book="+ $('#book').html().replace(/ /g, '_'),
+		        dataType: "json",
+		        success: function(data){
+		        	createTableDinamicallyComments(data);
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
 		function createTableDinamically(res){
 			$('#syn').append(res.syn);
 			var text="<ul>"
@@ -95,6 +156,15 @@ table#tbl2 {
 	         }
 			text=text.concat("</ul>");
 			$('#lik').append(text);
+		}
+
+		function createTableDinamicallyComments(res){
+			var text="<ul>";
+			for (j = 0; j < res.length; j++) {
+	             text=text.concat("<li>&#40;"+res[j].date +"&#41; " + res[j].user+ " said: &#34;"+res[j].comment +"&#34;"+"</li>");
+	         }
+			text=text.concat("</ul>");
+			$('#com').append(text);
 		}
 	-->
 	</script>

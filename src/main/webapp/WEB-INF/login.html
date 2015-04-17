@@ -5,75 +5,51 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"></meta>
+<link rel="stylesheet" type="text/css" media="screen, projection"
+	href="/bookface/styles/bookface-login.css" />
 </head>
-<body class="back"
-	style="margin-top: 0px; margin-bottom: 0px; height: 100%;">
-	<div class="background"
-		style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px; max-width: 1120px;">
-		<table align="center">
-			<tbody>
-				<tr>
-					<td>
-						<div>Bookface</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table align="center">
-			<tbody>
-				<tr align="center">
-					<td align="center">
-						<div style="height: 634px; width: 1080px; padding-top: 20px;">
-							<div style="display: inline; width: 100%">
-								<span style="display: inline; font-size: 18px;"
-									th:text="#{welcometo}"> Welcome to <b
-									style="display: inline; font-weight: bold;">iLearnFractions
-								</b>
-								</span>
-							</div>
-							<div style="height: 150px; width: 1060px; margin-top: 30px;">
-								<form name="login-form" action="j_spring_security_check"
-									method="post" style="width: 100%;">
-									<span
-										style="padding: 30px 50px 10px 80px; margin-left: 0px; display: inherit; text-align: left; line-height: 30px; font-size: 17px; font-weight: bold; color: #0076a3;">
-										Please sign in:<br />
-									</span>
-									<table>
-										<tr style="display: inline-flex;">
-											<td style="padding-left: 0px;"><span
-												style="color: #0076a3;" th:text="#{username}">Username</span>
-											</td>
-											<td style="margin-right: 55px;"><input name="username"
-												type="text"
-												style="-webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; outline: 0; height: 25px; width: 225px; padding-left: 10px; padding-right: 10px; -moz-box-shadow: 0 2px 4px #bbb inset; -webkit-box-shadow: 0 2px 4px #BBB inset; box-shadow: 0 2px 4px #BBB inset;" /></td>
-											<td><span style="color: #0076a3;" th:text="#{password}">Password</span></td>
-											<td style="padding-right: 20px;"><input name="password"
-												type="password"
-												style="-webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; outline: 0; height: 25px; width: 225px; padding-left: 10px; padding-right: 10px; -moz-box-shadow: 0 2px 4px #bbb inset; -webkit-box-shadow: 0 2px 4px #BBB inset; box-shadow: 0 2px 4px #BBB inset;" /></td>
-											<td><input type="submit" name="submit" value="LOGIN"
-												id="loginButton" /></td>
-										</tr>
-									</table>
-									<span th:text="${error}"
-										style="color: red; font-size: 14px; margin-left: 100px">
-									</span>
-									<span th:text="${msg}"
-										style="color: blue; font-size: 14px; margin-left: 100px">
-									</span>
-								</form>
-							</div>
-							<div style="display: inline; margin-left: 10px; float: left; width: 130px;">
-								<a href="#" th:href="@{/register}" class="it2lbutton"
-									th:text="#{register}"> Register
-								</a>
-							</div>
+<body>
+	<table id="header" align="center">
+		<tr align="center">
+			<td id="logo" align="center">
+				<div class="it2llogo" id="it2llogo">
+					<a href="#" th:href="@{/main}"> <img
+						src="../../images/bookface.jpg"
+						th:src="@{/resources/images/bookface.jpg}" alt="italk2learn" />
+					</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div id="wrapper">
+		<form name="login-form" class="login-form"
+			action="j_spring_security_check" method="post">
 
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="header">
+				<h1>Login Form</h1>
+				<span>Fill out the form below to login.</span>
+			</div>
+
+			<div class="content">
+				<input name="username" type="text" class="input username"
+					placeholder="Username" />
+				<div class="user-icon"></div>
+				<input name="password" type="password" class="input password"
+					placeholder="Password" />
+				<div class="pass-icon"></div>
+			</div>
+
+			<div class="footer">
+				<input type="submit" name="submit" value="LOGIN" class="button" />
+				<a class="register" href="#" th:href="@{/register}"
+					th:text="#{register}"> Register </a>
+			</div>
+			<span th:text="${error}"
+				style="color: red; font-size: 14px; margin-left: 100px"> </span> <span
+				th:text="${msg}"> </span>
+		</form>
+
 	</div>
+	<div class="gradient"></div>
 </body>
 </html>
-

@@ -21,7 +21,7 @@ public class LoginUserDAO extends HibernateDaoSupport implements ILoginUserDAO {
 		return this.getSessionFactory().getCurrentSession();
 	}
 	
-	public boolean insertNewUser(String username, String password) throws BookfaceException {
+	public boolean insertNewUser(String username, String password, String email) throws BookfaceException {
 		final Session session = this.getBookfaceSession();
 		byte b=1;
 		try {
@@ -29,6 +29,7 @@ public class LoginUserDAO extends HibernateDaoSupport implements ILoginUserDAO {
 			us.setUsername(username);
 			us.setPassword(password);
 			us.setEnabled(b);
+			us.setEmail(email);
 			session.saveOrUpdate(us);
 			UserRoles ur= new UserRoles();
 			ur.setRole("ROLE_USER");

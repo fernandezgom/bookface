@@ -28,11 +28,10 @@ public class LikesDAO extends HibernateDaoSupport implements ILikesDAO {
 	public List<Likes> getAllDataLikes(String user) throws BookfaceException {
 		try {
 			final Criteria criteria = getBookfaceSession().createCriteria(Likes.class);
-			List<Likes> list = (List<Likes>) criteria.list();
 			criteria.createCriteria("users", "u");
 			criteria.add(Restrictions.eq("u.username", user));
 			criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-			return list;
+			return (List<Likes>) criteria.list();
 		} catch (Exception e){
 			throw new BookfaceException(e);
 		}

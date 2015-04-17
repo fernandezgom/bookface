@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org" lang="en">
+
+<head>
+<title>Bookface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="screen, projection"
+	href="/bookface/styles/bookface-main.css" />
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+<style>
+table,th,td {
+	
+}
+
+th,td {
+	padding: 5px;
+	text-align: left;
+}
+
+table#tbl {
+	width: 100%;
+	border: 1px solid black;
+	border-collapse: collapse;
+	background-color: #f1f1c1;
+	border-collapse: collapse;
+}
+
+table#tbl1 {
+	width: 100%;
+}
+
+table#tblmain {
+	width: 100%;
+}
+</style>
+</head>
+
+<body class="paper">
+	<h1 id="username" align="center" style="color: blue;"></h1>
+	<table id="header" align="center">
+		<tr align="center">
+			<td align="left">
+				<div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
+					<a href="#" th:href="@{/auth/logout}">Logout</a>
+				</div>
+			</td>
+			<td id="logo" align="center">
+				<div>
+					<a href="#" th:href="@{/main}"> <img
+						src="../../images/bookface.jpg"
+						th:src="@{/resources/images/bookface.jpg}" alt="italk2learn" />
+					</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table align="center" id="tblmain">
+		<tr align="center">
+			<td align="center">
+				<div id="content" align="center">
+					<div id="main" class="span-18 last" tiles:include="body"
+						align="center">
+
+						<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+						<!-- At runtime, the body of this <div> will be substituted by -->
+						<!-- Tiles in order to create the final HTML page that will be -->
+						<!-- sent to the browser.                                      -->
+						<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+						BODY PAGE GOES HERE!
+
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+	<!--
+		$(document).ready(function() {
+			getUser();
+		});
+
+		function getUser(){
+		    $.ajax({
+		        type: 'GET',
+		        url: "/bookface/author/getUser",
+		        dataType: "json",
+		        success: function(data){
+		        	$('#username').html("Welcome: "+data);
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
+	-->
+	</script>
+</body>
+
+</html>
