@@ -4,6 +4,7 @@ public class CommentsVO {
 	
 	private String comment;
 	private String user;
+	private String email;
 	private String date;
 	private String book;
 	
@@ -30,6 +31,12 @@ public class CommentsVO {
 	}
 	public void setBook(String book) {
 		this.book = book;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

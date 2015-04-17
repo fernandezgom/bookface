@@ -2,15 +2,16 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `email` varchar(45) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-insert into `users`(`username`,`password`,`enabled`) values ('alex','123456',1);
-insert into `users`(`username`,`password`,`enabled`) values ('mkyong','123456',1);
-insert into `users`(`username`,`password`,`enabled`) values ('pedrulo','12345',1);
-insert into `users`(`username`,`password`,`enabled`) values ('tludmetal','12345',1);
-insert into `users`(`username`,`password`,`enabled`) values ('tludmetal2','12345',1);
+insert into `users`(`username`,`password`,`enabled`,`email`) values ('alex','123456',1,'fasffasd@hotmail.com');
+insert into `users`(`username`,`password`,`enabled`,`email`) values ('garamond','123456',1,'fasdf@hotmail.com');
+insert into `users`(`username`,`password`,`enabled`,`email`) values ('pedrulo','12345',1,'xvcbc@hotmail.com');
+insert into `users`(`username`,`password`,`enabled`,`email`) values ('tludmetal','12345',1,'rrrr@hotmail.com');
+insert into `users`(`username`,`password`,`enabled`,`email`) values ('tludmetal2','12345',1,'sdgn@hotmail.com' );
 
 CREATE TABLE `user_roles` (
   `user_role_id` int(11) NOT NULL AUTO_INCREMENT,

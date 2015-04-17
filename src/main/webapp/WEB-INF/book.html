@@ -161,7 +161,7 @@ table#tbl2 {
 		function createTableDinamicallyComments(res){
 			var text="<ul>";
 			for (j = 0; j < res.length; j++) {
-	             text=text.concat("<li>&#40;"+res[j].date +"&#41; " + res[j].user+ " said: &#34;"+res[j].comment +"&#34;"+"</li>");
+	             text=text.concat("<li>&#40;"+res[j].date +"&#41; " + res[j].user+"&#40;"+ res[j].email+"&#41;" + " said: &#34;"+res[j].comment +"&#34;"+"</li>");
 	         }
 			text=text.concat("</ul>");
 			$('#com').append(text);

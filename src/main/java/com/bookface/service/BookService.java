@@ -92,6 +92,7 @@ public class BookService implements IBookService {
 				aux.setComment(entity.getComment());
 				aux.setDate(entity.getDate().toString());
 				aux.setUser(entity.getUsers().getUsername());
+				aux.setEmail(entity.getUsers().getEmail());
 				result.add(aux);
 			}
 			return result;
