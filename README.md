@@ -7,6 +7,10 @@ The project points to an external database hosted on:
 
 FreeMySQLhosting.net
 
+This database expire in one week, since the account is created. So it must be expired. 
+
+Check bookface-config.properties to point your database. Database dump was provided (bookface.sql)
+
 To run the project execute the following command:
 
 mvn tomcat:run
